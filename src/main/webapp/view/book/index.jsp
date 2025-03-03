@@ -38,7 +38,7 @@
         }
 
         th {
-            background-color: #007bff;
+            background-color: #f8d210;
             color: white;
             font-weight: bold;
         }
@@ -120,8 +120,6 @@
     <jsp:include page="../../include/header.jsp"/>
 </header>
 
-<h2>Book Management</h2>
-<h3>Add New Book</h3>
 <form id="addBookForm">
     <input type="text" id="newTitle" placeholder="Title" required>
     <input type="text" id="newAuthor" placeholder="Author" required>
@@ -196,6 +194,10 @@
         });
     }
 </script>
+
+<header>
+    <jsp:include page="../../include/footer.jsp"/>
+</header>
 
 </body>
 </html>

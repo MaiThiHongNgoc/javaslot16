@@ -42,13 +42,13 @@ public class LoansController extends HttpServlet {
 
             entityManager.getTransaction().begin();
             StoredProcedureQuery query = entityManager.createStoredProcedureQuery("InsertLoan");
-            query.registerStoredProcedureParameter("bookId", Integer.class, ParameterMode.IN);
-            query.registerStoredProcedureParameter("memberId", Integer.class, ParameterMode.IN);
-            query.registerStoredProcedureParameter("borrowDate", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("book_id", Integer.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("member_id", Integer.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("borrow_date", String.class, ParameterMode.IN);
             query.registerStoredProcedureParameter("status", String.class, ParameterMode.IN);
-            query.setParameter("bookId", bookId);
-            query.setParameter("memberId", memberId);
-            query.setParameter("borrowDate", borrowDate);
+            query.setParameter("book_id", bookId);
+            query.setParameter("member_id", memberId);
+            query.setParameter("borrow_date", borrowDate);
             query.setParameter("status", status);
             query.execute();
             entityManager.getTransaction().commit();

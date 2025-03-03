@@ -12,5 +12,9 @@
 </h1>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
+<header>
+    <jsp:include page="include/footer.jsp"/>
+</header>
 </body>
+
 </html>

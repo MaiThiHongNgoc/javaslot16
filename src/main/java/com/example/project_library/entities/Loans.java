@@ -12,33 +12,34 @@ public class Loans {
     private int id;
 
     @Column(name = "book_id", nullable = false)
-    private int bookId;
+    private int book_id;
 
     @Column(name = "member_id", nullable = false)
-    private int memberId;
+    private int member_id;
 
     @Column(name = "borrow_date", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date borrowDate;
+    private Date borrow_date;
 
     @Column(name = "return_date")
     @Temporal(TemporalType.DATE)
-    private Date returnDate;
+    private Date return_date;
 
     @Column(name = "status", nullable = false)
     private String status; // Borrowed hoặc Returned
 
-    // Constructors
-    public Loans() {}
+    public Loans() {
+    }
 
-    public Loans(int bookId, int memberId, Date borrowDate, String status) {
-        this.bookId = bookId;
-        this.memberId = memberId;
-        this.borrowDate = borrowDate;
+    public Loans(int id, int book_id, int member_id, Date borrow_date, Date return_date, String status) {
+        this.id = id;
+        this.book_id = book_id;
+        this.member_id = member_id;
+        this.borrow_date = borrow_date;
+        this.return_date = return_date;
         this.status = status;
     }
 
-    // Getters và Setters
     public int getId() {
         return id;
     }
@@ -47,36 +48,36 @@ public class Loans {
         this.id = id;
     }
 
-    public int getBookId() {
-        return bookId;
+    public int getBook_id() {
+        return book_id;
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
+    public void setBook_id(int book_id) {
+        this.book_id = book_id;
     }
 
-    public int getMemberId() {
-        return memberId;
+    public int getMember_id() {
+        return member_id;
     }
 
-    public void setMemberId(int memberId) {
-        this.memberId = memberId;
+    public void setMember_id(int member_id) {
+        this.member_id = member_id;
     }
 
-    public Date getBorrowDate() {
-        return borrowDate;
+    public Date getBorrow_date() {
+        return borrow_date;
     }
 
-    public void setBorrowDate(Date borrowDate) {
-        this.borrowDate = borrowDate;
+    public void setBorrow_date(Date borrow_date) {
+        this.borrow_date = borrow_date;
     }
 
-    public Date getReturnDate() {
-        return returnDate;
+    public Date getReturn_date() {
+        return return_date;
     }
 
-    public void setReturnDate(Date returnDate) {
-        this.returnDate = returnDate;
+    public void setReturn_date(Date return_date) {
+        this.return_date = return_date;
     }
 
     public String getStatus() {
@@ -86,6 +87,4 @@ public class Loans {
     public void setStatus(String status) {
         this.status = status;
     }
-
-
 }

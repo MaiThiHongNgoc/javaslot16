@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* General styles */
-        /*body {*/
-        /*    font-family: Arial, sans-serif;*/
-        /*    margin: 20px;*/
-        /*    padding: 0;*/
-        /*    background-color: #f9f9f9;*/
-        /*}*/
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
 
         h2 {
             text-align: center;
@@ -38,8 +38,38 @@
         }
 
         th {
-            background-color: #007bff;
-            color: white;
+            background-color: #f8d210;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Form styles */
+        #memberForm {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid  #f8d210;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        #memberForm input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        #memberForm input:focus {
+            border-color: #45637d;
+            outline: none;
+            box-shadow: 0 0 5px rgba(69, 99, 125, 0.5);
         }
 
         /* Button styles */
@@ -48,12 +78,13 @@
             margin: 4px;
             cursor: pointer;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 5px;
             font-size: 14px;
+            transition: 0.3s;
         }
 
         .btn-edit {
@@ -61,47 +92,40 @@
             color: white;
         }
 
+        .btn-edit:hover {
+            background-color: #218838;
+        }
+
         .btn-delete {
             background-color: #dc3545;
             color: white;
         }
 
-        .btn i {
-            font-size: 16px;
+        .btn-delete:hover {
+            background-color: #c82333;
         }
 
-        /* Form styles */
-        #memberForm {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        #memberForm input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
+        /* Save button */
         #memberForm button {
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 12px 15px;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s;
         }
 
         #memberForm button:hover {
             background-color: #0056b3;
         }
+
+        /* Icon styles */
+        .btn i {
+            font-size: 16px;
+        }
+
     </style>
 </head>
 
@@ -111,7 +135,6 @@
 
 <body>
 
-<h2>Member Management</h2>
 
 <form id="memberForm">
     <input type="hidden" id="memberId">
@@ -216,6 +239,9 @@
         }
     }
 </script>
+<header>
+    <jsp:include page="../../include/footer.jsp"/>
+</header>
 
 </body>
 </html>

@@ -7,33 +7,40 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /*body {*/
-        /*    font-family: Arial, sans-serif;*/
-        /*    margin: 20px;*/
-        /*    padding: 20px;*/
-        /*    background-color: #f8f9fa;*/
-        /*}*/
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
         h2, h3 {
             text-align: center;
+            color: #333;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+
+        /* Form Styling */
+        form {
+            max-width: 500px;
+            margin: 20px auto;
             background: #fff;
-            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
+
+        input[type="text"], input[type="date"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
         }
-        th {
-            background-color: #007bff;
-            color: white;
-        }
+
+        /* Button Styling */
         .btn {
-            padding: 8px 12px;
+            padding: 10px 15px;
             cursor: pointer;
             border: none;
             border-radius: 5px;
@@ -42,25 +49,68 @@
             align-items: center;
             justify-content: center;
             gap: 5px;
+            font-size: 16px;
+            transition: 0.3s;
         }
-        .btn-edit { background-color: #ffc107; }
-        .btn-delete { background-color: #dc3545; }
-        .btn-add { background-color: #28a745; margin-top: 10px; }
-        .btn i { font-size: 14px; }
-        input[type="text"], input[type="date"] {
+
+        .btn-add {
+            background-color: #28a745;
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            margin-top: 10px;
         }
-        form {
-            text-align: center;
+        .btn-add:hover {
+            background-color: #218838;
+        }
+
+        .btn-edit {
+            background-color: #007bff;
+        }
+        .btn-edit:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
             background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #f8d210;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Align icons properly */
+        .btn i {
+            font-size: 18px;
+        }
+
     </style>
 </head>
 <body>
@@ -69,16 +119,22 @@
     <jsp:include page="../../include/header.jsp"/>
 </header>
 
-<h2>Loan Management</h2>
-<h3>Add New Loan</h3>
 <form id="addLoanForm">
     <input type="text" id="newBookId" placeholder="Book ID" required>
     <input type="text" id="newMemberId" placeholder="Member ID" required>
     <input type="date" id="newBorrowDate" required>
+
+    <select id="newStatus" required>
+        <option value="">Select Status</option>
+        <option value="Borrowed">Borrowed</option>
+        <option value="Returned">Returned</option>
+    </select>
+
     <button type="submit" class="btn btn-add">
         <i class="fas fa-plus"></i> Add Loan
     </button>
 </form>
+
 
 <!-- Loan Table -->
 <table>
@@ -98,10 +154,10 @@
         for (Loans loan : loans) { %>
     <tr data-id="<%= loan.getId() %>">
         <td><%= loan.getId() %></td>
-        <td><input type="text" value="<%= loan.getBookId() %>" class="edit-book-id"></td>
-        <td><input type="text" value="<%= loan.getMemberId() %>" class="edit-member-id"></td>
-        <td><input type="date" value="<%= loan.getBorrowDate() %>" class="edit-borrow-date"></td>
-        <td><input type="date" value="<%= loan.getReturnDate() %>" class="edit-return-date"></td>
+        <td><input type="text" value="<%= loan.getBook_id() %>" class="edit-book-id"></td>
+        <td><input type="text" value="<%= loan.getMember_id() %>" class="edit-member-id"></td>
+        <td><input type="date" value="<%= loan.getBorrow_date() %>" class="edit-borrow-date"></td>
+        <td><input type="date" value="<%= loan.getReturn_date() %>" class="edit-return-date"></td>
         <td><input type="text" value="<%= loan.getStatus() %>" class="edit-status"></td>
         <td>
             <button class="btn btn-edit" onclick="updateLoan(<%= loan.getId() %>)">
@@ -166,11 +222,17 @@
     }
 
     // Add new loan
-    $("#addLoanForm").submit(function(e) {
+    $("#addLoanForm").submit(function (e) {
         e.preventDefault();
         let book_id = $("#newBookId").val();
         let member_id = $("#newMemberId").val();
         let borrow_date = $("#newBorrowDate").val();
+        let status = $("#newStatus").val(); // Get the status value
+
+        if (!status) {
+            alert("Please select a loan status.");
+            return;
+        }
 
         $.ajax({
             url: "loans",
@@ -178,18 +240,23 @@
             data: {
                 bookId: book_id,
                 memberId: member_id,
-                borrowDate: borrow_date
+                borrowDate: borrow_date,
+                status: status // Include status
             },
-            success: function() {
+            success: function () {
                 alert("Loan added successfully!");
                 location.reload();
             },
-            error: function() {
+            error: function () {
                 alert("Failed to add loan.");
             }
         });
     });
+
 </script>
+<header>
+    <jsp:include page="../../include/footer.jsp"/>
+</header>
 
 </body>
 </html>
